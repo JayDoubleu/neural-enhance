@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.0-cudnn6-devel
+FROM nvidia/cuda:10.0-cudnn7-devel
 
 # Install dependencies
 RUN apt-get -qq update           &&  \
