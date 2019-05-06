@@ -30,4 +30,4 @@ RUN wget -q "https://github.com/alexjc/neural-enhance/releases/download/v0.3/ne4
 COPY enhance.py .
 
 # Set an entrypoint to the main enhance.py script
-ENTRYPOINT ["/opt/conda/bin/python3.7", "enhance.py", "--device=gpu"]
+ENTRYPOINT ["/opt/conda/bin/python3.7", "enhance.py", "--device=cuda"]
