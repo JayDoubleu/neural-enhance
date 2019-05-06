@@ -29,6 +29,8 @@ import argparse
 import itertools
 import threading
 import collections
+import matplotlib.pyplot as plt
+from PIL import Image
 
 
 # Configure all options first so we can later custom-load other libraries (Theano) based on device specified by user.
@@ -568,7 +570,7 @@ class NeuralEnhancer(object):
             for i in range(3):
                 output[:,:,i] = self.match_histograms(output[:,:,i], original[:,:,i])
 
-        return scipy.misc.toimage(output, cmin=0, cmax=255)
+        return Image.fromarray(np.asarray(np.clip(output, 0, 255), dtype="uint8"), "RGB")
 
 
 if __name__ == "__main__":
@@ -580,7 +582,7 @@ if __name__ == "__main__":
         enhancer = NeuralEnhancer(loader=False)
         for filename in args.files:
             print(filename, end=' ')
-            img = scipy.ndimage.imread(filename, mode='RGB')
+            img = plt.imread(filename)
             out = enhancer.process(img)
             out.save(os.path.splitext(filename)[0]+'_ne%ix.png' % args.zoom)
             print(flush=True)
