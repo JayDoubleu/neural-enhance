@@ -18,7 +18,7 @@ RUN wget --quiet https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86
 WORKDIR /ne
 COPY requirements.txt .
 RUN /opt/conda/bin/conda install -q -y conda numpy scipy pip pillow pygpu matplotlib
-RUN /opt/conda/bin/python3.5 -m pip install -q -r "requirements.txt"
+RUN /opt/conda/bin/python3.7 -m pip install -q -r "requirements.txt"
 
 # Get a pre-trained neural networks, non-commercial & attribution.
 RUN wget -q "https://github.com/alexjc/neural-enhance/releases/download/v0.3/ne1x-photo-deblur-0.3.pkl.bz2"
@@ -30,4 +30,4 @@ RUN wget -q "https://github.com/alexjc/neural-enhance/releases/download/v0.3/ne4
 COPY enhance.py .
 
 # Set an entrypoint to the main enhance.py script
-ENTRYPOINT ["/opt/conda/bin/python3.5", "enhance.py", "--device=gpu"]
+ENTRYPOINT ["/opt/conda/bin/python3.7", "enhance.py", "--device=gpu"]
